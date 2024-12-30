@@ -39,7 +39,7 @@
       "christian-kohler.npm-intellisense",
       "formulahendry.auto-complete-tag",
       "bradlc.vscode-tailwindcss",
-      "burkeholland.simple-react-snippets",
+      "burkeholland.simple-react-snippets"
     ]
   }
 }
