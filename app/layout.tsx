@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
+import type { FunctionComponent, PropsWithChildren } from 'react'
 import './globals.css'
 
 const inter = Inter({
@@ -7,7 +8,7 @@ const inter = Inter({
   subsets: ['vietnamese']
 })
 
-const space_grotesk = Space_Grotesk({
+const spaceGrotesk = Space_Grotesk({
   variable: '--font-space_grotesk',
   subsets: ['vietnamese']
 })
@@ -17,18 +18,14 @@ export const metadata: Metadata = {
   description: 'NOT better than Stack Overflow'
 }
 
-export default function RootLayout({
+const RootLayout: FunctionComponent<Readonly<PropsWithChildren>> = ({
   children
-}: Readonly<{
-  children: React.ReactNode
-}>) {
-  return (
-    <html lang='en'>
-      <body
-        className={`${inter.variable} ${space_grotesk.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  )
-}
+}) => (
+  <html lang='en'>
+    <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
+      {children}
+    </body>
+  </html>
+)
+
+export default RootLayout

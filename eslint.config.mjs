@@ -1,4 +1,5 @@
 import { FlatCompat } from '@eslint/eslintrc'
+import love from 'eslint-config-love'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -10,8 +11,9 @@ const compat = new FlatCompat({
 })
 
 const eslintConfig = [
+  love,
   ...compat.config({
-    extends: ['next', 'prettier', 'plugin:tailwindcss/recommended']
+    extends: ['prettier', 'plugin:tailwindcss/recommended', 'next']
   })
 ]
 
