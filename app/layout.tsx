@@ -1,3 +1,4 @@
+import ThemeProvider from '@/contexts/themes.provider'
 import type { Metadata } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import type { FunctionComponent, PropsWithChildren } from 'react'
@@ -21,9 +22,11 @@ export const metadata: Metadata = {
 const RootLayout: FunctionComponent<Readonly<PropsWithChildren>> = ({
   children
 }) => (
-  <html lang='en'>
+  <html lang='en' suppressHydrationWarning>
     <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
-      {children}
+      <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+        {children}
+      </ThemeProvider>
     </body>
   </html>
 )
