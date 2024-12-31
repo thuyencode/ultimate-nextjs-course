@@ -13,7 +13,13 @@ const compat = new FlatCompat({
 const eslintConfig = [
   love,
   ...compat.config({
-    extends: ['prettier', 'plugin:tailwindcss/recommended', 'next']
+    extends: ['prettier', 'plugin:tailwindcss/recommended', 'next'],
+    ignorePatterns: [
+      'components/ui',
+      'eslint.config.mjs',
+      'postcss.config.mjs',
+      'next-env.d.ts'
+    ]
   })
 ]
 
