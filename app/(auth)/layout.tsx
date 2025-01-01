@@ -1,4 +1,5 @@
 import { SocialAuthForm } from '@/components/forms'
+import { ASSETS } from '@/constants'
 import Image from 'next/image'
 import type { FunctionComponent, PropsWithChildren } from 'react'
 
@@ -15,7 +16,7 @@ const AuthLayout: FunctionComponent<PropsWithChildren> = ({ children }) => (
         </div>
 
         <Image
-          src='/images/site-logo.svg'
+          src={ASSETS.SITE_LOGO}
           alt="DevFlow's logo"
           width={50}
           height={50}

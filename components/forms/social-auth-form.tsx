@@ -1,3 +1,4 @@
+import { ASSETS } from '@/constants'
 import { cn } from '@/lib/utils'
 import Image, { type ImageProps } from 'next/image'
 import type { ReactElement } from 'react'
@@ -7,7 +8,7 @@ export const SocialAuthForm = (): ReactElement => (
   <div className='mt-10 flex flex-wrap gap-2.5'>
     <SocialAuthButton
       imageProps={{
-        src: '/icons/github.svg',
+        src: ASSETS.GITHUB_ICON,
         alt: "Github's logo",
         className: 'invert-colors'
       }}
@@ -16,7 +17,7 @@ export const SocialAuthForm = (): ReactElement => (
 
     <SocialAuthButton
       imageProps={{
-        src: '/icons/google.svg',
+        src: ASSETS.GOOGLE_ICON,
         alt: "Google's logo"
       }}
       text='Log in with Google'
