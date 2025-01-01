@@ -19,7 +19,10 @@ const eslintConfig = [
       'eslint.config.mjs',
       'postcss.config.mjs',
       'next-env.d.ts'
-    ]
+    ],
+    rules: {
+      '@typescript-eslint/no-magic-numbers': 'off'
+    }
   })
 ]
 

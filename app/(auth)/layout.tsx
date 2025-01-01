@@ -16,11 +16,11 @@ const AuthLayout: FunctionComponent<PropsWithChildren> = ({ children }) => (
         </div>
 
         <Image
+          className='object-contain'
           src={ASSETS.SITE_LOGO}
           alt="DevFlow's logo"
           width={50}
           height={50}
-          className='object-contain'
         />
       </div>
 
