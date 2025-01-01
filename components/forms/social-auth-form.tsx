@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text -- The `alt` prop is already in `imageProps` */
 'use client'
 
 import { ASSETS, ROUTES } from '@/constants'
@@ -9,10 +10,43 @@ import Image, { type ImageProps } from 'next/image'
 import type { ReactElement } from 'react'
 import { Button, type ButtonProps } from '../ui/button'
 
-export const SocialAuthForm = (): ReactElement => {
-  const handleLogIn = async (
-    provider: Extract<OAuthProviderType, 'github' | 'google'>
-  ): Promise<void> => {
+export const SocialAuthForm = (): ReactElement => (
+  <div className='mt-10 flex flex-wrap gap-2.5'>
+    <SocialAuthButton
+      provider='github'
+      imageProps={{
+        src: ASSETS.GITHUB_ICON,
+        alt: "Github's logo",
+        className: 'invert-colors'
+      }}
+      text='Log in with GitHub'
+    />
+
+    <SocialAuthButton
+      provider='google'
+      imageProps={{
+        src: ASSETS.GOOGLE_ICON,
+        alt: "Google's logo"
+      }}
+      text='Log in with Google'
+    />
+  </div>
+)
+
+interface SocialAuthButtonProps {
+  imageProps: ImageProps
+  buttonProps?: Omit<ButtonProps, 'onClick'>
+  text: string
+  provider: Extract<OAuthProviderType, 'github' | 'google'>
+}
+
+function SocialAuthButton({
+  imageProps,
+  buttonProps,
+  text,
+  provider
+}: SocialAuthButtonProps): ReactElement {
+  const handleLogIn = async (): Promise<void> => {
     try {
       await signIn(provider, {
         redirectTo: ROUTES.HOME,
@@ -33,51 +67,11 @@ export const SocialAuthForm = (): ReactElement => {
   }
 
   return (
-    <div className='mt-10 flex flex-wrap gap-2.5'>
-      <SocialAuthButton
-        imageProps={{
-          src: ASSETS.GITHUB_ICON,
-          alt: "Github's logo",
-          className: 'invert-colors'
-        }}
-        buttonProps={{
-          onClick: () => {
-            void handleLogIn('github')
-          }
-        }}
-        text='Log in with GitHub'
-      />
-
-      <SocialAuthButton
-        imageProps={{
-          src: ASSETS.GOOGLE_ICON,
-          alt: "Google's logo"
-        }}
-        buttonProps={{
-          onClick: () => {
-            void handleLogIn('google')
-          }
-        }}
-        text='Log in with Google'
-      />
-    </div>
-  )
-}
-
-interface SocialAuthButtonProps {
-  imageProps: ImageProps
-  buttonProps?: ButtonProps
-  text: string
-}
-
-function SocialAuthButton({
-  imageProps,
-  buttonProps,
-  text
-}: SocialAuthButtonProps): ReactElement {
-  return (
     <Button
       {...buttonProps}
+      onClick={() => {
+        void handleLogIn()
+      }}
       className={cn(
         'background-dark400_light900 body-medium text-dark200_light800 min-h-12 flex-1 rounded-2 px-4 py-3.5',
         buttonProps?.className
@@ -87,7 +81,6 @@ function SocialAuthButton({
         width={20}
         height={20}
         {...imageProps}
-        alt={imageProps.alt}
         className={cn('mr-2.5 object-contain', imageProps.className)}
       />
 
