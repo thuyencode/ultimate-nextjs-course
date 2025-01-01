@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description: 'NOT better than Stack Overflow'
 }
 
-const RootLayout: FunctionComponent<Readonly<PropsWithChildren>> = ({
+const AppLayout: FunctionComponent<Readonly<PropsWithChildren>> = ({
   children
 }) => (
   <html lang='en' suppressHydrationWarning>
@@ -31,4 +31,4 @@ const RootLayout: FunctionComponent<Readonly<PropsWithChildren>> = ({
   </html>
 )
 
-export default RootLayout
+export default AppLayout
