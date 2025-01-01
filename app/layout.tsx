@@ -1,5 +1,8 @@
+import { auth } from '@/auth'
+import { Toaster } from '@/components/ui/toaster'
 import ThemeProvider from '@/contexts/themes.provider'
 import type { Metadata } from 'next'
+import { SessionProvider } from 'next-auth/react'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import type { FunctionComponent, PropsWithChildren } from 'react'
 import './globals.css'
@@ -19,16 +22,26 @@ export const metadata: Metadata = {
   description: 'NOT better than Stack Overflow'
 }
 
-const AppLayout: FunctionComponent<Readonly<PropsWithChildren>> = ({
+const AppLayout: FunctionComponent<Readonly<PropsWithChildren>> = async ({
   children
-}) => (
-  <html lang='en' suppressHydrationWarning>
-    <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
-      <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-        {children}
-      </ThemeProvider>
-    </body>
-  </html>
-)
+}) => {
+  const session = await auth()
+
+  return (
+    <html lang='en' suppressHydrationWarning>
+      <body
+        className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
+      >
+        <SessionProvider session={session}>
+          <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+            {children}
+          </ThemeProvider>
+
+          <Toaster />
+        </SessionProvider>
+      </body>
+    </html>
+  )
+}
 
 export default AppLayout
