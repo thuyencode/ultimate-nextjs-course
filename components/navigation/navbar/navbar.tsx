@@ -2,6 +2,7 @@ import { ASSETS } from '@/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactElement } from 'react'
+import MobileNavbar from './mobile-navbar'
 import ThemeToggle from './theme-toggle'
 
 const Navbar = (): ReactElement => (
@@ -23,6 +24,8 @@ const Navbar = (): ReactElement => (
 
     <div className='flex-between gap-5'>
       <ThemeToggle />
+
+      <MobileNavbar />
     </div>
   </nav>
 )
