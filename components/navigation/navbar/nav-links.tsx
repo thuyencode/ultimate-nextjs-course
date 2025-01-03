@@ -1,50 +1,12 @@
 'use client'
 
 import { SheetClose } from '@/components/ui/sheet'
-import { ASSETS, ROUTES } from '@/constants'
+import { SIDEBAR_LINKS } from '@/constants'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Fragment, type FunctionComponent } from 'react'
-
-const SIDEBAR_LINKS: Array<{ imgURL: string; label: string; route: string }> = [
-  {
-    imgURL: ASSETS.HOME_ICON,
-    route: '/',
-    label: 'Home'
-  },
-  {
-    imgURL: ASSETS.USERS_ICON,
-    route: ROUTES.COMMUNITY,
-    label: 'Community'
-  },
-  {
-    imgURL: ASSETS.START_ICON,
-    route: ROUTES.COLLECTION,
-    label: 'Collections'
-  },
-  {
-    imgURL: ASSETS.SUITCASE_ICON,
-    route: ROUTES.JOBS,
-    label: 'Find Jobs'
-  },
-  {
-    imgURL: ASSETS.TAG_ICON,
-    route: ROUTES.TAGS,
-    label: 'Tags'
-  },
-  {
-    imgURL: ASSETS.USER_ICON,
-    route: ROUTES.PROFILE,
-    label: 'Profile'
-  },
-  {
-    imgURL: ASSETS.QUESTION_ICON,
-    route: ROUTES.ASK,
-    label: 'Ask a question'
-  }
-]
 
 const isActiveRoute = (route: string, pathname: string): boolean =>
   (pathname.includes(route) && route.length > 1) || pathname === route
@@ -53,7 +15,7 @@ interface NavLinkProps {
   isMobileNav?: boolean
 }
 
-const NavLink: FunctionComponent<NavLinkProps> = ({ isMobileNav }) => {
+export const NavLinks: FunctionComponent<NavLinkProps> = ({ isMobileNav }) => {
   const pathname = usePathname()
   const userId: number | undefined = 1
 
@@ -110,5 +72,3 @@ const NavLink: FunctionComponent<NavLinkProps> = ({ isMobileNav }) => {
     </>
   )
 }
-
-export default NavLink

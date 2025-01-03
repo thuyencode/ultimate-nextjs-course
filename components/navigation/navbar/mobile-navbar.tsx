@@ -11,7 +11,7 @@ import { ASSETS, ROUTES } from '@/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactElement } from 'react'
-import NavLinks from './nav-links'
+import { NavLinks } from './nav-links'
 
 const MobileNavbar = (): ReactElement => (
   <Sheet>
