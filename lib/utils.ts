@@ -10,6 +10,6 @@ export const getDeviconClassName = (techName: string): string => {
   const normalizedTechName = techName.replace(/[ .]/g, '').toLowerCase()
 
   return TECHS_MAP[normalizedTechName]
-    ? `${TECHS_MAP[normalizedTechName]} `
+    ? `${TECHS_MAP[normalizedTechName]} colored`
     : 'devicon-devicon-plain'
 }
