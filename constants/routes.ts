@@ -7,5 +7,7 @@ export const ROUTES = {
   TAGS: '/tags',
   PROFILE: '/profile',
   ASK: '/ask-question',
-  JOBS: '/jobs'
+  JOBS: '/jobs',
+  QUESTION: (id: string) => `/questions/${id}`,
+  TAG: (id: string) => `/tags/${id}`
 } as const

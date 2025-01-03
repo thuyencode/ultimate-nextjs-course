@@ -29,6 +29,14 @@ const AppLayout: FunctionComponent<Readonly<PropsWithChildren>> = async ({
 
   return (
     <html lang='en' suppressHydrationWarning>
+      <head>
+        <link
+          rel='stylesheet'
+          type='text/css'
+          href='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css'
+        />
+      </head>
+
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
       >

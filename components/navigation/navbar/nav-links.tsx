@@ -61,7 +61,7 @@ export const NavLinks: FunctionComponent<NavLinkProps> = ({ isMobileNav }) => {
           </Link>
         )
 
-        return isMobileNav === true ? (
+        return isMobileNav ? (
           <SheetClose asChild key={item.route}>
             {LinkComponent}
           </SheetClose>

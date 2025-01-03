@@ -41,3 +41,4 @@ export const SIDEBAR_LINKS = [
 
 export * from './assets'
 export * from './routes'
+export * from './techs-map'

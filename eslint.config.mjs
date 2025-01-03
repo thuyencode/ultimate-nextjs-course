@@ -21,7 +21,8 @@ const eslintConfig = [
       'next-env.d.ts'
     ],
     rules: {
-      '@typescript-eslint/no-magic-numbers': 'off'
+      '@typescript-eslint/no-magic-numbers': 'off',
+      '@typescript-eslint/strict-boolean-expressions': 'off'
     }
   })
 ]
