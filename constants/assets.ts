@@ -12,5 +12,6 @@ export const ASSETS = {
   QUESTION_ICON: '/icons/question.svg',
   ACCOUNT_ICON: '/icons/account.svg',
   REGISTER_ICON: '/icons/sign-up.svg',
-  CHEVRON_RIGHT: '/icons/chevron-right.svg'
+  CHEVRON_RIGHT: '/icons/chevron-right.svg',
+  SEARCH_ICON: '/icons/search.svg'
 } as const
