@@ -5,7 +5,7 @@ export const ROUTES = {
   COMMUNITY: '/community',
   COLLECTION: '/collection',
   TAGS: '/tags',
-  PROFILE: '/profile',
+  PROFILE: (id: string) => `/profile/${id}`,
   ASK: '/ask-question',
   JOBS: '/jobs',
   QUESTION: (id: string) => `/questions/${id}`,

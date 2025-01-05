@@ -29,7 +29,7 @@ export const SIDEBAR_LINKS = [
   },
   {
     imgURL: ASSETS.USER_ICON,
-    route: ROUTES.PROFILE,
+    route: '/profile',
     label: 'Profile'
   },
   {

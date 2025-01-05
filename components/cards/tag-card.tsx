@@ -4,13 +4,20 @@ import Link from 'next/link'
 import type { FunctionComponent, ReactElement } from 'react'
 import { Badge } from '../ui/badge'
 
-interface TagCardProps {
+type TagCardProps = {
   _id: string
   name: string
-  questions: number
-  showCount?: boolean
   compact?: boolean
-}
+} & (
+  | {
+      showCount?: false
+      questions?: never
+    }
+  | {
+      showCount: true
+      questions: number
+    }
+)
 
 export const TagCard: FunctionComponent<TagCardProps> = ({
   _id,
@@ -19,10 +26,10 @@ export const TagCard: FunctionComponent<TagCardProps> = ({
   compact,
   showCount
 }): ReactElement => (
-  <Link className='flex justify-between capitalize' href={ROUTES.TAG(_id)}>
+  <Link href={ROUTES.TAG(_id)} className='flex justify-between gap-2'>
     <Badge className='subtle-medium background-light800_dark300 text-light400_light500 rounded-md border-none px-4 py-2 uppercase'>
       <div className='flex-center space-x-2'>
-        <i className={`${getDeviconClassName(name)} text-sm`} />
+        <i className={`${getDeviconClassName(name)} text-sm`}></i>
         <span>{name}</span>
       </div>
     </Badge>

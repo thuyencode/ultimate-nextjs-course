@@ -1,19 +1,25 @@
+import { QuestionCard } from '@/components/cards'
 import { HomeFilter } from '@/components/filters'
 import { LocalSearch } from '@/components/search'
 import { Button } from '@/components/ui/button'
 import { ASSETS, ROUTES } from '@/constants'
+import type { Question } from '@/types/global'
 import Link from 'next/link'
 import type { FunctionComponent } from 'react'
 
-const QUESTIONS = [
+const QUESTIONS: Question[] = [
   {
     _id: '1',
     title: 'Best practices for custom hooks in React',
     description:
       "Hi there, I've been learning about React hooks for a while now and just stumbled upon custom hooks pattern. Any suggestions to write production-ready custom hooks?",
     tags: [{ _id: '1', name: 'react' }],
-    author: { _id: 1, name: 'Thuyen Code' },
-    upvote: 5,
+    author: {
+      _id: '1',
+      name: 'Thuyen Code',
+      image: 'https://avatars.githubusercontent.com/u/134030308?v=4'
+    },
+    upvotes: 5,
     answers: 2,
     views: 10,
     createdAt: new Date()
@@ -26,8 +32,12 @@ const QUESTIONS = [
       { _id: '1', name: 'react' },
       { _id: '2', name: 'solid' }
     ],
-    author: { _id: 1, name: 'Thuyen Code' },
-    upvote: 7,
+    author: {
+      _id: '1',
+      name: 'Thuyen Code',
+      image: 'https://avatars.githubusercontent.com/u/134030308?v=4'
+    },
+    upvotes: 7,
     answers: 4,
     views: 20,
     createdAt: new Date()
@@ -38,8 +48,12 @@ const QUESTIONS = [
     description:
       "JS was my first programming language but honestly it's not my favorite. Recently I've getting into low-level stuff likes how memory actually works and JS abstracts many of those away from me. Just found out about Rust yesterday and it's very hyped. I wanna try but I find its syntaxes are kinda unfamiliar.",
     tags: [{ _id: '6', name: 'rust' }],
-    author: { _id: 1, name: 'Thuyen Code' },
-    upvote: 100,
+    author: {
+      _id: '1',
+      name: 'Thuyen Code',
+      image: 'https://avatars.githubusercontent.com/u/134030308?v=4'
+    },
+    upvotes: 100,
     answers: 10,
     views: 125,
     createdAt: new Date()
@@ -50,8 +64,12 @@ const QUESTIONS = [
     description:
       'Just migrated from Win to Linux, any suggestions on how to setup a cool dev env likes those of the savvy tech YouTuber?',
     tags: [{ _id: '6', name: 'linux' }],
-    author: { _id: 1, name: 'Thuyen Code' },
-    upvote: -10,
+    author: {
+      _id: '1',
+      name: 'Thuyen Code',
+      image: 'https://avatars.githubusercontent.com/u/134030308?v=4'
+    },
+    upvotes: -10,
     answers: 50,
     views: 200,
     createdAt: new Date()
@@ -67,13 +85,17 @@ const QUESTIONS = [
       { _id: '5', name: 'elysia' },
       { _id: '8', name: 'nodejs' }
     ],
-    author: { _id: 1, name: 'Thuyen Code' },
-    upvote: 6969,
+    author: {
+      _id: '1',
+      name: 'Thuyen Code',
+      image: 'https://avatars.githubusercontent.com/u/134030308?v=4'
+    },
+    upvotes: 6969,
     answers: 69,
     views: 6969,
     createdAt: new Date()
   }
-] as const
+]
 
 interface HomePageProps {
   searchParams: Promise<Record<string, string | undefined>>
@@ -119,7 +141,7 @@ const HomePage: FunctionComponent<HomePageProps> = async ({ searchParams }) => {
 
       <div className='mt-10 flex w-full flex-col gap-6'>
         {filteredQuestions.map((question) => (
-          <h1 key={question._id}>{question.title}</h1>
+          <QuestionCard key={question._id} question={question} />
         ))}
       </div>
     </>
