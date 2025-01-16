@@ -16,5 +16,6 @@ export const ASSETS = {
   SEARCH_ICON: '/icons/search.svg',
   LIKE_ICON: '/icons/like.svg',
   EYE_ICON: '/icons/eye.svg',
-  MESSAGE_ICON: '/icons/message.svg'
+  MESSAGE_ICON: '/icons/message.svg',
+  CLOSE_ICON: '/icons/close.svg'
 } as const
