@@ -64,3 +64,5 @@ export const AskQuestionSchema = z.object({
     .min(1, { message: 'At least one tag is required.' })
     .max(3, { message: 'Cannot add more than 3 tags.' })
 })
+
+export type AskQuestion = z.infer<typeof AskQuestionSchema>
