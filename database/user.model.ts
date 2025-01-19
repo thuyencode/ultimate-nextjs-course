@@ -11,11 +11,11 @@ const userSchemaDefinition = {
   reputation: { type: Number, default: 0 }
 }
 
+type UserDefinition = InferRawDocType<typeof userSchemaDefinition>
+
 const UserSchema = new Schema<UserDefinition>(userSchemaDefinition, {
   timestamps: true
 })
-
-type UserDefinition = InferRawDocType<typeof userSchemaDefinition>
 
 const User = models?.user || model<UserDefinition>('User', UserSchema)
 
