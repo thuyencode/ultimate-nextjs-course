@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition -- This is fine */
-import { model, models, Schema, type InferRawDocType } from 'mongoose'
+import {
+  model,
+  models,
+  Schema,
+  type InferRawDocType,
+  type SchemaDefinition
+} from 'mongoose'
 
 const userSchemaDefinition = {
   name: { type: String, required: true },
@@ -9,7 +15,7 @@ const userSchemaDefinition = {
   image: { type: String, required: true },
   location: { type: String },
   reputation: { type: Number, default: 0 }
-}
+} satisfies SchemaDefinition
 
 type UserDefinition = InferRawDocType<typeof userSchemaDefinition>
 
