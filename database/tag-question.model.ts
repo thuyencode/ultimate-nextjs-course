@@ -1,28 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition -- This is fine */
-import {
-  model,
-  models,
-  Schema,
-  type InferRawDocType,
-  type SchemaDefinition
-} from 'mongoose'
+import { model, models, Schema, type Document, type Types } from 'mongoose'
 
-const tagQuestionSchemaDefinition = {
-  tagId: { type: Schema.Types.ObjectId, ref: 'Tag', required: true },
-  question: { type: Schema.Types.ObjectId, ref: 'Question', required: true }
-} satisfies SchemaDefinition
+export interface TagQuestionDefinition {
+  tagId: Types.ObjectId
+  question: Types.ObjectId
+}
 
-type TagQuestionDefinition = InferRawDocType<typeof tagQuestionSchemaDefinition>
+export type TagQuestionDoc = TagQuestionDefinition & Document
 
 const TagQuestionSchema = new Schema<TagQuestionDefinition>(
-  tagQuestionSchemaDefinition,
+  {
+    tagId: { type: Schema.Types.ObjectId, ref: 'Tag', required: true },
+    question: { type: Schema.Types.ObjectId, ref: 'Question', required: true }
+  },
   {
     timestamps: true
   }
 )
 
-const TagQuestion =
+export const TagQuestion =
   models?.tagQuestion ||
   model<TagQuestionDefinition>('TagQuestion', TagQuestionSchema)
-
-export { TagQuestion, type TagQuestionDefinition }

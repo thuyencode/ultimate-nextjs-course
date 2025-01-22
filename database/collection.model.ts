@@ -1,28 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition -- This is fine */
-import {
-  model,
-  models,
-  Schema,
-  type InferRawDocType,
-  type SchemaDefinition
-} from 'mongoose'
+import { model, models, Schema, type Document, type Types } from 'mongoose'
 
-const collectionSchemaDefinition = {
-  author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  question: { type: Schema.Types.ObjectId, ref: 'Question', required: true }
-} satisfies SchemaDefinition
+export interface CollectionDefinition {
+  author: Types.ObjectId
+  question: Types.ObjectId
+}
 
-type CollectionDefinition = InferRawDocType<typeof collectionSchemaDefinition>
+export type CollectionDoc = CollectionDefinition & Document
 
 const CollectionSchema = new Schema<CollectionDefinition>(
-  collectionSchemaDefinition,
+  {
+    author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    question: { type: Schema.Types.ObjectId, ref: 'Question', required: true }
+  },
   {
     timestamps: true
   }
 )
 
-const Collection =
+export const Collection =
   models?.collection ||
   model<CollectionDefinition>('Collection', CollectionSchema)
-
-export { Collection, type CollectionDefinition }

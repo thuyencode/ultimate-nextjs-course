@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition -- This is fine */
-import { model, models, Schema, type Types } from 'mongoose'
+import { model, models, Schema, type Document, type Types } from 'mongoose'
 
 const TYPE = ['question', 'answer'] as const
 const VOTE_TYPE = ['upvote', 'downvote'] as const
@@ -7,12 +7,14 @@ const VOTE_TYPE = ['upvote', 'downvote'] as const
 type Type = (typeof TYPE)[number]
 type VoteType = (typeof VOTE_TYPE)[number]
 
-interface VoteDefinition {
+export interface VoteDefinition {
   author: Types.ObjectId
   id: Types.ObjectId
   type: Type
   voteType: VoteType
 }
+
+export type VoteDoc = VoteDefinition & Document
 
 const VoteSchema = new Schema<VoteDefinition>(
   {
@@ -26,6 +28,4 @@ const VoteSchema = new Schema<VoteDefinition>(
   }
 )
 
-const Vote = models?.vote || model<VoteDefinition>('Vote', VoteSchema)
-
-export { Vote, type VoteDefinition }
+export const Vote = models?.vote || model<VoteDefinition>('Vote', VoteSchema)

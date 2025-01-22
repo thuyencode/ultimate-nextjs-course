@@ -1,26 +1,28 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition -- This is fine */
-import {
-  model,
-  models,
-  Schema,
-  type InferRawDocType,
-  type SchemaDefinition
-} from 'mongoose'
+import { model, models, Schema, type Document, type Types } from 'mongoose'
 
-const answerSchemaDefinition = {
-  author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  question: { type: Schema.Types.ObjectId, ref: 'Question', required: true },
-  content: { type: String, required: true },
-  upvotes: { type: Number, default: 0 },
-  downvotes: { type: Number, default: 0 }
-} satisfies SchemaDefinition
+export interface AnswerDefinition {
+  author: Types.ObjectId
+  question: Types.ObjectId
+  content: string
+  upvotes?: number
+  downvotes?: number
+}
 
-type AnswerDefinition = InferRawDocType<typeof answerSchemaDefinition>
+export type AnswerDoc = AnswerDefinition & Document
 
-const AnswerSchema = new Schema<AnswerDefinition>(answerSchemaDefinition, {
-  timestamps: true
-})
+const AnswerSchema = new Schema<AnswerDefinition>(
+  {
+    author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    question: { type: Schema.Types.ObjectId, ref: 'Question', required: true },
+    content: { type: String, required: true },
+    upvotes: { type: Number, default: 0 },
+    downvotes: { type: Number, default: 0 }
+  },
+  {
+    timestamps: true
+  }
+)
 
-const Answer = models?.answer || model<AnswerDefinition>('Answer', AnswerSchema)
-
-export { Answer, type AnswerDefinition }
+export const Answer =
+  models?.answer || model<AnswerDefinition>('Answer', AnswerSchema)

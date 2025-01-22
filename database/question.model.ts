@@ -1,33 +1,34 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition -- This is fine */
-import {
-  model,
-  models,
-  Schema,
-  type InferRawDocType,
-  type SchemaDefinition
-} from 'mongoose'
+import { model, models, Schema, type Document, type Types } from 'mongoose'
 
-const questionSchemaDefinition = {
-  title: { type: String, required: true },
-  content: { type: String, required: true },
-  tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
-  views: { type: Number, default: 0 },
-  answers: { type: Number, default: 0 },
-  upvotes: { type: Number, default: 0 },
-  downvotes: { type: Number, default: 0 },
-  author: { type: Schema.Types.ObjectId, ref: 'User', required: true }
-} satisfies SchemaDefinition
+export interface QuestionDefinition {
+  title: string
+  content: string
+  tags?: Types.ObjectId
+  views?: number
+  answers?: number
+  upvotes?: number
+  downvotes?: number
+  author: Types.ObjectId
+}
 
-type QuestionDefinition = InferRawDocType<typeof questionSchemaDefinition>
+export type QuestionDoc = QuestionDefinition & Document
 
 const QuestionSchema = new Schema<QuestionDefinition>(
-  questionSchemaDefinition,
+  {
+    title: { type: String, required: true },
+    content: { type: String, required: true },
+    tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
+    views: { type: Number, default: 0 },
+    answers: { type: Number, default: 0 },
+    upvotes: { type: Number, default: 0 },
+    downvotes: { type: Number, default: 0 },
+    author: { type: Schema.Types.ObjectId, ref: 'User', required: true }
+  },
   {
     timestamps: true
   }
 )
 
-const Question =
+export const Question =
   models?.question || model<QuestionDefinition>('Question', QuestionSchema)
-
-export { Question, type QuestionDefinition }
