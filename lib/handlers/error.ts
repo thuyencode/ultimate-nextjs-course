@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { ZodError } from 'zod'
 import { RequestError, ValidationError, type Errors } from '../http-errors'
+import logger from '../logger'
 
 export type ResponseType = 'api' | 'server'
 
@@ -37,6 +38,11 @@ const handleError = (
   responseType: ResponseType = 'server'
 ): FormattedResponse => {
   if (error instanceof RequestError) {
+    logger.error(
+      { error },
+      `${responseType.toUpperCase()} Error: ${error.message}`
+    )
+
     return formatResponse(
       responseType,
       error.statusCode,
@@ -51,6 +57,8 @@ const handleError = (
       error.flatten().fieldErrors as Errors
     )
 
+    logger.error({ error }, `Validation Error: ${validationError.message}`)
+
     return formatResponse(
       responseType,
       validationError.statusCode,
@@ -60,10 +68,15 @@ const handleError = (
   }
 
   if (error instanceof Error) {
+    logger.error(error.message)
+
     return formatResponse(responseType, 500, error.message)
   }
 
-  return formatResponse(responseType, 500, 'An unexpected error occurred')
+  const errorMessage = 'An unexpected error occurred'
+  logger.error({ error }, errorMessage)
+
+  return formatResponse(responseType, 500, errorMessage)
 }
 
 export default handleError

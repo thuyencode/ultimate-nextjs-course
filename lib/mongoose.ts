@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import logger from './logger'
 
 if (!process.env.MONGODB_URI) {
   throw new Error('MONGODB_URI is not defined')
@@ -26,18 +27,19 @@ export { MONGODB_URI }
 
 const dbConnect = async (): Promise<mongoose.Mongoose> => {
   if (cached.conn) {
+    logger.info('Using existing mongoose connection')
     return cached.conn
   }
 
   cached.promise ??= mongoose
     .connect(MONGODB_URI, { dbName: 'devflow' })
     .then((result) => {
-      console.log('Connected to MongoDB')
+      logger.info('Connected to MongoDB')
 
       return result
     })
     .catch((error: unknown) => {
-      console.error('Error connecting to MongoDB', error)
+      logger.error('Error connecting to MongoDB', error)
 
       // eslint-disable-next-line @typescript-eslint/only-throw-error -- This is fine
       throw error

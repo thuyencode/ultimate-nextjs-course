@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'avatars.githubusercontent.com' }
     ]
-  }
+  },
+  serverExternalPackages: ['pino', 'pino-pretty']
 }
 
 export default nextConfig
