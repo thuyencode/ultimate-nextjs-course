@@ -3,8 +3,6 @@ import { HomeFilter } from '@/components/filters'
 import { LocalSearch } from '@/components/search'
 import { Button } from '@/components/ui/button'
 import { ASSETS, ROUTES } from '@/constants'
-import handleError, { type FormattedResponse } from '@/lib/handlers/error'
-import { NotFoundError } from '@/lib/http-errors'
 import type { Question } from '@/types/global'
 import Link from 'next/link'
 import type { FunctionComponent } from 'react'
@@ -99,23 +97,11 @@ const QUESTIONS: Question[] = [
   }
 ]
 
-const test = async (): Promise<FormattedResponse | undefined> => {
-  try {
-    await new Promise(() => {
-      throw new NotFoundError('Your mom')
-    })
-  } catch (error) {
-    return handleError(error)
-  }
-}
-
 interface HomePageProps {
   searchParams: Promise<Record<string, string | undefined>>
 }
 
 const HomePage: FunctionComponent<HomePageProps> = async ({ searchParams }) => {
-  await test()
-
   const { query = '', filter = '' } = await searchParams
 
   const filteredQuestions = QUESTIONS.filter((question) => {

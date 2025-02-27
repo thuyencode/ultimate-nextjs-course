@@ -40,7 +40,8 @@
       "formulahendry.auto-complete-tag",
       "bradlc.vscode-tailwindcss",
       "burkeholland.simple-react-snippets",
-      "mongodb.mongodb-vscode"
+      "mongodb.mongodb-vscode",
+      "rangav.vscode-thunder-client"
     ]
   }
 }
