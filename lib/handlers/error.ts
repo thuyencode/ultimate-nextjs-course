@@ -53,7 +53,6 @@ const handleError = (
 
   if (error instanceof ZodError) {
     const validationError = new ValidationError(
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- This is fine
       error.flatten().fieldErrors as Errors
     )
 

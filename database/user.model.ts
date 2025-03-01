@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition -- This is fine */
-import { model, models, Schema, type Document } from 'mongoose'
+import { model, models, Schema, type Document, type Model } from 'mongoose'
 
 export interface UserDefinition {
   name: string
   username: string
   email: string
   bio?: string
-  image: string
+  image?: string
   location?: string
   reputation?: number
 }
@@ -28,4 +28,5 @@ const UserSchema = new Schema<UserDefinition>(
   }
 )
 
-export const User = models?.user || model<UserDefinition>('User', UserSchema)
+export const User = (models?.user ||
+  model<UserDefinition>('User', UserSchema)) as Model<UserDefinition>

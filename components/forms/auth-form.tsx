@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-type-assertion -- This is fine */
 'use client'
 
 import { Button } from '@/components/ui/button'

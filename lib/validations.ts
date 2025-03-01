@@ -1,3 +1,5 @@
+import type { UserDefinition } from '@/database/user.model'
+import type { TypeToZod } from '@/types/global'
 import { z } from 'zod'
 
 const EmailSchema = z
@@ -66,3 +68,15 @@ export const AskQuestionSchema = z.object({
 })
 
 export type AskQuestion = z.infer<typeof AskQuestionSchema>
+
+export const UserSchema = z.object<TypeToZod<UserDefinition>>({
+  name: z.string().min(1, { message: 'Name is required' }),
+  username: z
+    .string()
+    .min(3, { message: 'Username must be at least 3 characters long' }),
+  email: z.string().email('Email is required'),
+  bio: z.string().optional(),
+  image: z.string().url('Please provide a valid URL').optional(),
+  location: z.string().optional(),
+  reputation: z.number().optional()
+})
